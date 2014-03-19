@@ -23,5 +23,7 @@ setup(
     entry_points="""\
     [paste.app_factory]
     main = foomn:main
+    [console_scripts]
+    initialize_foomn_db = foomn.scripts.initializedb:main
     """,
 )
