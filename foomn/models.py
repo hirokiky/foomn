@@ -16,10 +16,10 @@ Base = declarative_base()
 
 region_code_possibility = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
 url_regexp = re.compile(
-    r'^(?:http|ftp)s?://'
-    r'(?P<host>(?:[A-Z0-9](?:[A-Z0-9-]{0,61}[A-Z0-9])?\.)+(?:[A-Z]{2,6}\.?|[A-Z0-9-]{2,}\.?))'
-    r'(?::\d+)?'
-    r'(?:/?|[/?]\S+)$',
+    r'^(?:http|ftp)s?://'  # schema
+    r'(?P<host>(?:[A-Z0-9-]+?\.)+[A-Z]+)'  # host
+    r'(?::\d+)?'  # port
+    r'(?:/?|[/?]\S+)$',  # path
     re.IGNORECASE
 )
 IGNORING_HOSTS = ['foo.mn', 'bit.ly', 'tinyurl.com', 'goo.gl', 't.co', 'ow.ly', 'htn.to', 'p.tl']

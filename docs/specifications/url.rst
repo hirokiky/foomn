@@ -19,6 +19,7 @@ Allowed schema:
 Not support:
 
 * localhost
+* User and password
 * IPAddress v4/v6
 
 Ignoring hosts to prevent infinite redirecting:
