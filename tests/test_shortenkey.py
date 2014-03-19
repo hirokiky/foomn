@@ -73,9 +73,9 @@ class TestExpandShortenKey(unittest.TestCase):
 
     def test__key_matched(self):
         from foomn import models
-        mapping = models.URIMapping(mapping_id=1,
+        mapping = models.URLMapping(mapping_id=1,
                                     region_code='0',
-                                    uri='http://example.com/')
+                                    url='http://example.com/')
         models.DBSession.add(mapping)
         models.DBSession.flush()
 

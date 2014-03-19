@@ -17,11 +17,11 @@ def home(request):
 def expand(request):
     shortenkey = request.matchdict['shortenkey']
     try:
-        uri = expand_shortenkey(shortenkey)
+        url = expand_shortenkey(shortenkey)
     except (InvalidShortenKey, ShortenKeyDoesNotExist):
         raise HTTPNotFound
 
-    return HTTPMovedPermanently(location=uri)
+    return HTTPMovedPermanently(location=url)
 
 
 @view_config(route_name='api_shorten')

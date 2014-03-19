@@ -15,19 +15,19 @@ DBSession = scoped_session(sessionmaker(extension=ZopeTransactionExtension()))
 Base = declarative_base()
 
 region_code_possibility = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
-uri_regexp = re.compile(r'^$')
+url_regexp = re.compile(r'^$')
 
 
-class URIMapping(Base):
-    """ Table for mapping URI and mapping id
+class URLMapping(Base):
+    """ Table for mapping URL and mapping id
     mapping id is calculated from shorten key
     """
-    __tablename__ = 'urimapping'
+    __tablename__ = 'urlmapping'
     query = DBSession.query_property()
 
     mapping_id = sa.Column(sa.SmallInteger(), nullable=False, primary_key=True)
     region_code = sa.Column(sa.String(1))
-    uri = sa.Column(sa.String(1024))
+    url = sa.Column(sa.String(1024))
 
     @validates('region_code')
     def validate_region_code(self, key, region_code):
@@ -35,11 +35,11 @@ class URIMapping(Base):
             raise ValueError('Invalid region code')
         return region_code
 
-#     @validates('uri')
-#     def validate_uri(self, key, uri):
-#         if uri_regexp.match(uri) is None:
-#             raise ValueError('Invalid URI')
-#         return uri
+#     @validates('url')
+#     def validate_url(self, key, url):
+#         if url_regexp.match(url) is None:
+#             raise ValueError('Invalid URL')
+#         return url
 
     __table_args__ = (
         sa.UniqueConstraint('mapping_id', 'region_code'),

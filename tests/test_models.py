@@ -1,10 +1,10 @@
 import unittest
 
 
-class TestURIMapping(unittest.TestCase):
+class TestURLMapping(unittest.TestCase):
     def _getTarget(self):
-        from foomn.models import URIMapping
-        return URIMapping
+        from foomn.models import URLMapping
+        return URLMapping
 
     def _makeOne(self, *args, **kwargs):
         return self._getTarget()(*args, **kwargs)

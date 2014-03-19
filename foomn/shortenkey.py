@@ -5,7 +5,7 @@ import re
 
 from sqlalchemy.orm.exc import NoResultFound
 
-from foomn.models import URIMapping
+from foomn.models import URLMapping
 
 shortenkey_possibility = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
 shortenkey_regexp = re.compile(r'^[a-zA-Z0-9]{2,}$')
@@ -20,7 +20,7 @@ class ShortenKeyDoesNotExist(Exception):
 
 
 def mapping_code_to_id(mapping_code):
-    """ Translate mapping code to id value of URIMapping.
+    """ Translate mapping code to id value of URLMapping.
     """
     ret = 0
     base = len(shortenkey_possibility)
@@ -54,21 +54,21 @@ def parse_shortenkey(shortenkey):
     return region_code, mapping_code
 
 
-def generate_shortenkey(uri):
-    """ Save a given uri and return it's shorten key
+def generate_shortenkey(url):
+    """ Save a given url and return it's shorten key
     """
 
 
 def expand_shortenkey(shortenkey):
-    """ Return URI to correspond to a given shorten key
+    """ Return URL to correspond to a given shorten key
     """
     region_code, mapping_code = parse_shortenkey(shortenkey)
     mapping_id = mapping_code_to_id(mapping_code)
 
     try:
-        mapping = URIMapping.query.filter(
-            (URIMapping.region_code == region_code) & (URIMapping.mapping_id == mapping_id)
+        mapping = URLMapping.query.filter(
+            (URLMapping.region_code == region_code) & (URLMapping.mapping_id == mapping_id)
         ).one()
     except NoResultFound:
         raise ShortenKeyDoesNotExist
-    return mapping.uri
+    return mapping.url

@@ -1,8 +1,8 @@
 ===
-URI
+URL
 ===
 
 overview
 ========
 
-Allowed URI:
+Allowed URL:

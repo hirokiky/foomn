@@ -5,5 +5,5 @@ Shorten
 overview
 ========
 
-API to generate shorten URI to correspond to applied URI.
-Returns single shorten URI for single URI.
+API to generate shorten URL to correspond to applied URL.
+Returns single shorten URL for single URL.
