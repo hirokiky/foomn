@@ -19,3 +19,5 @@ of the URL so that users can copy it quickly.
 
 New generated URLs will insert to field under the input area one by one.
 These URLs continue to be displayed until the user deletes the Cookie.
+
+If user did not input any schema, 'http://' will be automatically inserted.

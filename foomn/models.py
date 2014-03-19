@@ -15,7 +15,14 @@ DBSession = scoped_session(sessionmaker(extension=ZopeTransactionExtension()))
 Base = declarative_base()
 
 region_code_possibility = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
-url_regexp = re.compile(r'^$')
+url_regexp = re.compile(
+    r'^(?:http|ftp)s?://'
+    r'(?P<host>(?:[A-Z0-9](?:[A-Z0-9-]{0,61}[A-Z0-9])?\.)+(?:[A-Z]{2,6}\.?|[A-Z0-9-]{2,}\.?))'
+    r'(?::\d+)?'
+    r'(?:/?|[/?]\S+)$',
+    re.IGNORECASE
+)
+IGNORING_HOSTS = ['foo.mn', 'bit.ly', 'tinyurl.com', 'goo.gl', 't.co', 'ow.ly', 'htn.to', 'p.tl']
 
 
 class URLMapping(Base):
@@ -35,11 +42,14 @@ class URLMapping(Base):
             raise ValueError('Invalid region code')
         return region_code
 
-#     @validates('url')
-#     def validate_url(self, key, url):
-#         if url_regexp.match(url) is None:
-#             raise ValueError('Invalid URL')
-#         return url
+    @validates('url')
+    def validate_url(self, key, url):
+        matched = url_regexp.match(url)
+        if matched is None:
+            raise ValueError('Invalid URL')
+        if matched.group('host') in IGNORING_HOSTS:
+            raise ValueError('Host of specified URL was ignored')
+        return url
 
     __table_args__ = (
         sa.UniqueConstraint('mapping_id', 'region_code'),
