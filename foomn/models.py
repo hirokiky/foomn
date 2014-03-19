@@ -32,7 +32,7 @@ class URLMapping(Base):
     __tablename__ = 'urlmapping'
     query = DBSession.query_property()
 
-    mapping_id = sa.Column(sa.SmallInteger(), nullable=False, primary_key=True)
+    mapping_id = sa.Column(sa.Integer(), primary_key=True)
     region_code = sa.Column(sa.String(1))
     url = sa.Column(sa.String(1024))
 
